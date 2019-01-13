@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:padding="20dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Explore"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="#000"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="25dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="new amazing places in egypt"
+        android:layout_marginBottom="5dp"
+        android:textSize="14sp"
+        android:layout_marginLeft="25dp"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                style="@style/RippleStyleWhite"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/touristic_place_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/touristic"
+                        android:scaleType="centerCrop"
+                        />
+
+                </android.support.v7.widget.CardView>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Touristic Places"
+                android:layout_marginBottom="5dp"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_marginLeft="15dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/places_count_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24 places to visit"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                style="@style/RippleStyleWhite"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/hotel"
+                        android:scaleType="centerCrop"
+                        />
+
+                </android.support.v7.widget.CardView>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hotels"
+                android:layout_marginBottom="5dp"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_marginLeft="15dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24 places to visit"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                style="@style/RippleStyleWhite"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/etnertaintment"
+                        android:scaleType="centerCrop"
+                        />
+
+                </android.support.v7.widget.CardView>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entertainment"
+                android:layout_marginBottom="5dp"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_marginLeft="15dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24 places to visit"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            >
+
+            <com.balysv.materialripple.MaterialRippleLayout
+                style="@style/RippleStyleWhite"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    >
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/restaurant"
+                        android:scaleType="centerCrop"
+                        />
+
+                </android.support.v7.widget.CardView>
+
+            </com.balysv.materialripple.MaterialRippleLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Restaurants "
+                android:layout_marginBottom="5dp"
+                android:textSize="16dp"
+                android:textColor="#000"
+                android:layout_marginLeft="15dp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="24 places to visit"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "980837951997",
+    "firebase_url": "https://egypt-785d4.firebaseio.com",
+    "project_id": "egypt-785d4",
+    "storage_bucket": "egypt-785d4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980837951997:android:d124cb2978d89889",
+        "android_client_info": {
+          "package_name": "ali.abdullahmansour.egypt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980837951997-gen7pghka9qj1k4n7l0q4ln8uddockjj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ali.abdullahmansour.egypt",
+            "certificate_hash": "e17351995ef754992a929b54644969995b74960a"
+          }
+        },
+        {
+          "client_id": "980837951997-gk8ag08ougp90pjsiiejs56uif0tmvnp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsxSpZWbLzNMaKU36PWIh92SlCGXQcXRg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980837951997-gk8ag08ougp90pjsiiejs56uif0tmvnp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
