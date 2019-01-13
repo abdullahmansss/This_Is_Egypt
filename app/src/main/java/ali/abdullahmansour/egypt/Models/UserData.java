@@ -2,11 +2,12 @@ package ali.abdullahmansour.egypt.Models;
 
 public class UserData
 {
-    String title,email,hotline,specialty,category,address,image_url,facebook_link;
+    String title,email,hotline,specialty,category,address,image_url;
 
     public UserData() { }
 
-    public UserData(String title, String email, String hotline, String specialty, String category, String address, String image_url, String facebook_link) {
+    public UserData(String title, String email, String hotline, String specialty, String category, String address, String image_url)
+    {
         this.title = title;
         this.email = email;
         this.hotline = hotline;
@@ -14,7 +15,6 @@ public class UserData
         this.category = category;
         this.address = address;
         this.image_url = image_url;
-        this.facebook_link = facebook_link;
     }
 
     public String getTitle() {
@@ -71,13 +71,5 @@ public class UserData
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
-    }
-
-    public String getFacebook_link() {
-        return facebook_link;
-    }
-
-    public void setFacebook_link(String facebook_link) {
-        this.facebook_link = facebook_link;
     }
 }

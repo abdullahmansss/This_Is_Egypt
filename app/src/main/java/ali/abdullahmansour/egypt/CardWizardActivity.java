@@ -62,7 +62,8 @@ public class CardWizardActivity extends AppCompatActivity
     }
 
 
-    private void bottomProgressDots(int current_index) {
+    private void bottomProgressDots(int current_index)
+    {
         LinearLayout dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         ImageView[] dots = new ImageView[MAX_STEP];
 

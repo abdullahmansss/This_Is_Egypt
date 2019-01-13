@@ -19,18 +19,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CompanyApp.LuxuryActivity"
             android:theme="@style/AppTheme2" />
         <activity
             android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme3" />
+            android:theme="@style/AppTheme3" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CardWizardActivity" />
         <activity android:name=".CompanyApp.PlacesActivity" />
         <activity android:name=".CompanyApp.EntertainmentActivity" />
@@ -40,7 +42,8 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".CompanyApp.EditProfileActivity"></activity>
+        <activity android:name=".CompanyApp.EditProfileActivity" />
+        <activity android:name=".CompanyDetailsActivity"></activity>
     </application>
 
 </manifest>

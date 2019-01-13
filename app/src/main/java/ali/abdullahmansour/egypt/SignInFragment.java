@@ -23,7 +23,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.victor.loading.rotate.RotateLoading;
+
+import ali.abdullahmansour.egypt.CompanyApp.Fragments.ProfileFragment;
+import ali.abdullahmansour.egypt.Models.UserData;
+import ali.abdullahmansour.egypt.TouristApp.TouristProfileFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -155,17 +165,56 @@ public class SignInFragment extends Fragment
                     {
                         if (task.isSuccessful())
                         {
-                            Intent intent = new Intent(getContext(), MainActivity.class);
-                            intent.putExtra("TAG", 1);
-                            startActivity(intent,
-                                    ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
-
+                            category();
                             rotateLoading.stop();
                         } else
                         {
                             Toast.makeText(getContext(), "wrong email or password", Toast.LENGTH_SHORT).show();
                             rotateLoading.stop();
                         }
+                    }
+                });
+    }
+
+    public void category()
+    {
+        FirebaseUser user = auth.getCurrentUser();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.keepSynced(true);
+
+        final String userId = user.getUid();
+
+        mDatabase.child("allusers").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener()
+                {
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        // Get user value
+                        UserData userData = dataSnapshot.getValue(UserData.class);
+
+                        String category = userData.getCategory();
+
+                        if (category.equals("company"))
+                        {
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            intent.putExtra("TAG", 1);
+                            startActivity(intent,
+                                    ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                        } else
+                        {
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            intent.putExtra("TAG", 2);
+                            startActivity(intent,
+                                    ActivityOptions.makeSceneTransitionAnimation(getActivity()).toBundle());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+                        Toast.makeText(getContext(), "can\'t fetch data", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

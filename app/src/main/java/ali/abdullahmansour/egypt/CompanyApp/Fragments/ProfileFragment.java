@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,7 @@ import java.util.List;
 
 import ali.abdullahmansour.egypt.CompanyApp.EditProfileActivity;
 import ali.abdullahmansour.egypt.MainActivity;
+import ali.abdullahmansour.egypt.Models.Review;
 import ali.abdullahmansour.egypt.Models.UserData;
 import ali.abdullahmansour.egypt.R;
 import ali.abdullahmansour.egypt.SignInFragment;
@@ -66,11 +68,14 @@ public class ProfileFragment extends Fragment
     ViewPager viewPager;
     TabLayout tabLayout;
 
+    RatingBar ratingBar;
+
     Uri photoPath;
 
     String company_title,company_specialty,company_hotline,company_imageurl,company_address;
 
     RotateLoading rotateLoading;
+    float rate = 0.0f;
 
     @Nullable
     @Override
@@ -96,6 +101,7 @@ public class ProfileFragment extends Fragment
         title = view.findViewById(R.id.company_title);
         specialty = view.findViewById(R.id.company_specialty);
         view_profile = view.findViewById(R.id.view_profile_btn);
+        ratingBar = view.findViewById(R.id.company_ratingbar);
 
         rotateLoading = view.findViewById(R.id.profilerotateloading);
 
@@ -171,9 +177,9 @@ public class ProfileFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                FirebaseAuth.getInstance().signOut();
+                /*FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
 
@@ -217,6 +223,34 @@ public class ProfileFragment extends Fragment
                                         .error(R.drawable.travel)
                                         .into(profilepic);
                             }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+                        Toast.makeText(getContext(), "can\'t fetch data", Toast.LENGTH_SHORT).show();
+                        rotateLoading.stop();
+                    }
+                });
+
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        databaseReference.keepSynced(true);
+
+        databaseReference.child("reviews").child(userId).addValueEventListener(
+                new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        rate = 0;
+                        // Get user value
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren())
+                        {
+                            Review review = snapshot.getValue(Review.class);
+                            rate = rate + Float.valueOf(review.getReviewrate());
+                        }
+                        float rate2 = rate / dataSnapshot.getChildrenCount();
+                        ratingBar.setRating(rate2);
                     }
 
                     @Override

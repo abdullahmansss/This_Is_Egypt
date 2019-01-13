@@ -42,8 +42,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditProfileActivity extends AppCompatActivity
 {
     CircleImageView edit_image;
-    EditText title,email,hotline,specialty,address,facebooklink;
-    Button save_changes;
+    EditText title,email,hotline,specialty,address;
+    Button save_changes,sign_out;
     RotateLoading rotateLoading;
 
     String company_title,compant_email,company_hotline,company_specialty,company_address,company_facebooklink,company_imageurl;
@@ -85,24 +85,23 @@ public class EditProfileActivity extends AppCompatActivity
                 String selected_hotline = hotline.getText().toString();
                 String selected_specialty = specialty.getText().toString();
                 String selected_address = address.getText().toString();
-                String selected_fb = facebooklink.getText().toString();
 
                 if (selected_title.length() == 0
                         || selected_email.length() == 0
                         || selected_hotline.length() == 0
                         || selected_specialty.length() == 0
                         || selected_address.length() == 0
-                        || selected_fb.length() == 0)
+                        )
                 {
                     Toast.makeText(getApplicationContext(), "please enter a valid data", Toast.LENGTH_SHORT).show();
                 } else
                     {
-                        if (company_imageurl.length() == 0 || selected_placeimaeURL.length() != 0)
+                        if (selected_placeimaeURL.length() != 0)
                         {
-                            uploadImage(selected_title,selected_email,selected_hotline,selected_specialty,"company",selected_address,selected_fb);
+                            uploadImage(selected_title,selected_email,selected_hotline,selected_specialty,"company",selected_address);
                         } else
                             {
-                                StoreNewUser(selected_title,selected_email,selected_hotline,selected_specialty,"company",selected_address,company_imageurl,selected_fb);
+                                StoreNewUser(selected_title,selected_email,selected_hotline,selected_specialty,"company",selected_address,company_imageurl);
                             }
                     }
             }
@@ -117,9 +116,18 @@ public class EditProfileActivity extends AppCompatActivity
         hotline = findViewById(R.id.edit_hotline);
         specialty = findViewById(R.id.edit_specialty);
         address = findViewById(R.id.edit_address);
-        facebooklink = findViewById(R.id.edit_facebboklink);
-        save_changes = findViewById(R.id.save_changes);
+        save_changes = findViewById(R.id.saveee);
         rotateLoading = findViewById(R.id.editprofilerotateloading);
+        sign_out = findViewById(R.id.sign_out);
+
+        sign_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         edit_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,14 +164,12 @@ public class EditProfileActivity extends AppCompatActivity
 
                         company_imageurl = userData.getImage_url();
                         company_address = userData.getAddress();
-                        company_facebooklink = userData.getFacebook_link();
 
                         title.setText(company_title);
                         email.setText(compant_email);
                         specialty.setText(company_specialty);
                         hotline.setText(company_hotline);
                         address.setText(company_address);
-                        facebooklink.setText(company_facebooklink);
 
                         if (company_imageurl.length() == 0)
                         {
@@ -172,8 +178,8 @@ public class EditProfileActivity extends AppCompatActivity
                             {
                                 Picasso.get()
                                         .load(company_imageurl)
-                                        .placeholder(R.drawable.me)
-                                        .error(R.drawable.me)
+                                        .placeholder(R.drawable.travel)
+                                        .error(R.drawable.travel)
                                         .into(edit_image);
                             }
                         rotateLoading.stop();
@@ -188,11 +194,11 @@ public class EditProfileActivity extends AppCompatActivity
                 });
     }
 
-    public void StoreNewUser(String title,String email,String hotline,String specialty,String category,String address,String image_url,String fb)
+    public void StoreNewUser(String title,String email,String hotline,String specialty,String category,String address,String image_url)
     {
         rotateLoading.start();
 
-        UserData userData = new UserData(title,email,hotline,specialty,category,address,image_url,fb);
+        UserData userData = new UserData(title,email,hotline,specialty,category,address,image_url);
 
         databaseReference.child("allusers").child(getUid()).setValue(userData);
         databaseReference.child(category).child(getUid()).setValue(userData);
@@ -220,7 +226,7 @@ public class EditProfileActivity extends AppCompatActivity
         }
     }
 
-    private void uploadImage(final String title,final String email,final String hotline,final String specialty,final String category,final String address,final String Fb)
+    private void uploadImage(final String title,final String email,final String hotline,final String specialty,final String category,final String address)
     {
         rotateLoading.start();
 
@@ -250,11 +256,7 @@ public class EditProfileActivity extends AppCompatActivity
 
                 selected_placeimaeURL = downloadUri.toString();
 
-                StoreNewUser(title,email,hotline,specialty,category,address,selected_placeimaeURL,Fb);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("TAG", 1);
-                startActivity(intent,
-                        ActivityOptions.makeSceneTransitionAnimation(EditProfileActivity.this).toBundle());
+                StoreNewUser(title,email,hotline,specialty,category,address,selected_placeimaeURL);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -299,5 +301,4 @@ public class EditProfileActivity extends AppCompatActivity
     {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
-
 }

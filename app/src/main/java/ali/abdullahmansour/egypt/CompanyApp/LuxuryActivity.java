@@ -113,7 +113,7 @@ public class LuxuryActivity extends AppCompatActivity
 
         if (user != null)
         {
-            if (user.getUid().equals("Q1rut3qvJ6PUCD5PwyNqafZVDQ03"))
+            if (user.getUid().equals("1gMb3IE1LBdDNd3bkdrgGjRXqZd2"))
             {
                 fab_layout.setVisibility(View.VISIBLE);
 
@@ -382,7 +382,7 @@ public class LuxuryActivity extends AppCompatActivity
 
             if (user != null)
             {
-                if (user.getUid().equals("Q1rut3qvJ6PUCD5PwyNqafZVDQ03"))
+                if (user.getUid().equals("1gMb3IE1LBdDNd3bkdrgGjRXqZd2"))
                 {
                     remove.setVisibility(View.VISIBLE);
                 } else

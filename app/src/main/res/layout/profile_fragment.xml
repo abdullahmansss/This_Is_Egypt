@@ -102,47 +102,43 @@
                             android:orientation="horizontal"
                             >
 
-                            <com.balysv.materialripple.MaterialRippleLayout
+                            <android.support.v7.widget.CardView
                                 android:layout_width="120dp"
                                 android:layout_height="match_parent"
-                                style="@style/RippleStyleWhite"
+                                app:cardCornerRadius="15dp"
+                                app:cardElevation="0dp"
+                                android:foreground="?android:attr/selectableItemBackground"
                                 android:layout_marginRight="10dp"
                                 >
 
-                                <Button
-                                    android:id="@+id/view_profile_btn"
+                                <com.balysv.materialripple.MaterialRippleLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:text="view profile"
-                                    android:textSize="12sp"
-                                    android:background="@drawable/edit_profile_btn"
-                                    android:textColor="#fff"
-                                    android:padding="5dp"
-                                    />
+                                    style="@style/RippleStyleWhite"
+                                    >
 
-                            </com.balysv.materialripple.MaterialRippleLayout>
+                                    <Button
+                                        android:id="@+id/view_profile_btn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:text="edit profile"
+                                        android:textSize="12sp"
+                                        android:background="@color/colorPrimary"
+                                        android:textColor="#fff"
+                                        android:padding="5dp"
+                                        />
 
-                            <com.balysv.materialripple.MaterialRippleLayout
-                                android:layout_width="30dp"
-                                android:layout_height="match_parent"
-                                style="@style/RippleStyleWhite"
-                                android:layout_marginRight="10dp"
-                                >
+                                </com.balysv.materialripple.MaterialRippleLayout>
+
+                            </android.support.v7.widget.CardView>
 
                                 <ImageView
                                     android:id="@+id/facebooklink_btn"
                                     android:layout_width="30dp"
                                     android:layout_height="match_parent"
-                                    android:src="@drawable/facebook"
+                                    android:src="@drawable/chat2"
+                                    android:layout_marginRight="10dp"
                                     />
-
-                            </com.balysv.materialripple.MaterialRippleLayout>
-
-                            <com.balysv.materialripple.MaterialRippleLayout
-                                android:layout_width="30dp"
-                                android:layout_height="match_parent"
-                                style="@style/RippleStyleWhite"
-                                >
 
                                 <ImageView
                                     android:id="@+id/phonenumber"
@@ -150,8 +146,6 @@
                                     android:layout_height="match_parent"
                                     android:src="@drawable/phone"
                                     />
-
-                            </com.balysv.materialripple.MaterialRippleLayout>
 
                         </LinearLayout>
 

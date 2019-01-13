@@ -11,14 +11,23 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import ali.abdullahmansour.egypt.CompanyApp.Fragments.ChatFragment;
 import ali.abdullahmansour.egypt.CompanyApp.Fragments.HomeFragment;
 import ali.abdullahmansour.egypt.CompanyApp.Fragments.ProfileFragment;
 import ali.abdullahmansour.egypt.CompanyApp.Fragments.TourGuideFragment;
+import ali.abdullahmansour.egypt.Models.UserData;
+import ali.abdullahmansour.egypt.TouristApp.TouristProfileFragment;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -40,6 +49,10 @@ public class MainActivity extends AppCompatActivity
         if (tag == 1)
         {
             loadFragment(new ProfileFragment());
+            navigation.setSelectedItemId(R.id.profile);
+        } else if (tag == 2)
+        {
+            loadFragment(new TouristProfileFragment());
             navigation.setSelectedItemId(R.id.profile);
         } else
             {
@@ -72,8 +85,7 @@ public class MainActivity extends AppCompatActivity
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                         if (user != null)
                         {
-                            Fragment profile = new ProfileFragment();
-                            loadFragment(profile);
+                            category();
                         } else
                         {
                             Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
@@ -84,6 +96,44 @@ public class MainActivity extends AppCompatActivity
                 return false;
             }
         });
+    }
+
+    public void category()
+    {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.keepSynced(true);
+
+        final String userId = user.getUid();
+
+        mDatabase.child("allusers").child(userId).addListenerForSingleValueEvent(
+                new ValueEventListener()
+                {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot)
+                    {
+                        // Get user value
+                        UserData userData = dataSnapshot.getValue(UserData.class);
+
+                        String category = userData.getCategory();
+
+                        if (category.equals("company"))
+                        {
+                            Fragment profile = new ProfileFragment();
+                            loadFragment(profile);
+                        } else
+                            {
+                                Fragment profile = new TouristProfileFragment();
+                                loadFragment(profile);
+                            }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError)
+                    {
+                        Toast.makeText(getApplicationContext(), "can\'t fetch data", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     public void loadFragment(Fragment fragment)
