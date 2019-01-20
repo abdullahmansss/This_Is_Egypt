@@ -11,4 +11,5 @@
     <color name="overlay_dark_30">#4D000000</color>
 
     <color name="smalltext">#969696</color>
+    <color name="chat">#4cbde9</color>
 </resources>

@@ -18,21 +18,23 @@
         android:roundIcon="@drawable/travel"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
 
-        </activity>
-        <activity
-            android:name=".CompanyApp.LuxuryActivity"
-            android:theme="@style/AppTheme2" />
-        <activity
-            android:name=".SplashScreenActivity"
-            android:theme="@style/AppTheme3" >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".CompanyApp.LuxuryActivity"
+            android:theme="@style/AppTheme2" />
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/AppTheme3"></activity>
         <activity android:name=".CardWizardActivity" />
         <activity android:name=".CompanyApp.PlacesActivity" />
         <activity android:name=".CompanyApp.EntertainmentActivity" />
@@ -43,7 +45,10 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".CompanyApp.EditProfileActivity" />
-        <activity android:name=".CompanyDetailsActivity"></activity>
+        <activity android:name=".CompanyDetailsActivity" />
+        <activity android:name=".ChatActivity"
+            android:windowSoftInputMode="stateHidden"
+            ></activity>
     </application>
 
 </manifest>
