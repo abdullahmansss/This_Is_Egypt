@@ -12,17 +12,6 @@
         </layer-list>
     </item>
 
-    <!-- On disable -->
-    <item android:state_enabled="false" >
-        <layer-list>
-            <item>
-                <shape android:shape="oval">
-                    <solid android:color="@color/colorPrimary"/>
-                </shape>
-            </item>
-        </layer-list>
-    </item>
-
     <!-- On normal -->
     <item android:state_focused="false" android:state_pressed="false" >
         <layer-list>

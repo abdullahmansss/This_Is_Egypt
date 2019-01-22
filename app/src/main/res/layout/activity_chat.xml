@@ -42,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        tools:listitem="@layout/chat_item"
         >
 
     </android.support.v7.widget.RecyclerView>
@@ -51,7 +52,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="10dp"
         >
 
             <android.support.v7.widget.CardView
@@ -61,31 +61,82 @@
                 app:cardCornerRadius="10dp"
                 app:cardElevation="2dp"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="16dp"
                 >
 
-            <EditText
-                android:id="@+id/message_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Type a message"
-                android:textColorHint="@color/smalltext"
-                android:textColor="#000"
-                android:padding="10dp"
-                android:background="@android:color/transparent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:inputType="textCapWords"
-                />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <EditText
+                        android:id="@+id/message_field"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Type a message"
+                        android:textColorHint="@color/smalltext"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        />
+
+                    <EditText
+                        android:id="@+id/record_txt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/smalltext"
+                        android:textColor="#000"
+                        android:padding="10dp"
+                        android:background="@android:color/transparent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Recording .."
+                        android:gravity="center"
+                        android:visibility="gone"
+                        />
+
+                </RelativeLayout>
 
             </android.support.v7.widget.CardView>
 
-        <Button
-            android:id="@+id/send_message_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/send_message"
-            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/send_message_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_send"
+                app:rippleColor="@color/btn"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/send_voice_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:src="@drawable/microphone"
+                app:rippleColor="@color/btn"
+                android:clickable="true"
+                android:focusable="true"
+                />
+
+            <ProgressBar
+                android:id="@+id/audio_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="visible"
+                />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

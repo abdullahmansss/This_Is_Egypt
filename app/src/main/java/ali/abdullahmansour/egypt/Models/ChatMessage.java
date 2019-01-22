@@ -2,15 +2,16 @@ package ali.abdullahmansour.egypt.Models;
 
 public class ChatMessage
 {
-    String message,id;
+    String message,id,messagetype;
     int hour,minute;
 
     public ChatMessage() {
     }
 
-    public ChatMessage(String message, String id, int hour, int minute) {
+    public ChatMessage(String message, String id, String messagetype, int hour, int minute) {
         this.message = message;
         this.id = id;
+        this.messagetype = messagetype;
         this.hour = hour;
         this.minute = minute;
     }
@@ -29,6 +30,14 @@ public class ChatMessage
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getMessagetype() {
+        return messagetype;
+    }
+
+    public void setMessagetype(String messagetype) {
+        this.messagetype = messagetype;
     }
 
     public int getHour() {
