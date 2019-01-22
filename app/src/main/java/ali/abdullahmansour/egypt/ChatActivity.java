@@ -9,6 +9,7 @@ import android.icu.util.TimeUnit;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
@@ -63,6 +64,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,7 +104,7 @@ public class ChatActivity extends AppCompatActivity
 
     StorageReference audioref;
 
-    ProgressBar progressBar;
+    RotateLoading progressBar;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("ClickableViewAccessibility")
@@ -120,7 +122,7 @@ public class ChatActivity extends AppCompatActivity
         send_message_btn = findViewById(R.id.send_message_btn);
         send_voice_btn = findViewById(R.id.send_voice_btn);
         record_txt = findViewById(R.id.record_txt);
-        progressBar = findViewById(R.id.audio_progress);
+        progressBar = findViewById(R.id.get_progress);
         recyclerView = findViewById(R.id.chat_recyclerview);
 
         toolbar = findViewById(R.id.chat_toolbar);
@@ -304,7 +306,7 @@ public class ChatActivity extends AppCompatActivity
         });*/
 
         send_voice_btn.setAlpha(0f);
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.start();
 
         UploadTask uploadTask;
 
@@ -334,7 +336,7 @@ public class ChatActivity extends AppCompatActivity
                 String audio_url = downloadUri.toString();
 
                 send_voice_btn.setAlpha(1f);
-                progressBar.setVisibility(View.GONE);
+                progressBar.stop();
 
                 final Calendar c = Calendar.getInstance();
                 int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -516,10 +518,10 @@ public class ChatActivity extends AppCompatActivity
         CardView audio_card;
         TextView audio_time_txt,audio_duration_txt;
         ImageView play_audio;
+        RotateLoading rotateLoading;
 
         MediaPlayer mediaPlayer;
-        int mediafilelength;
-        int realtimelength;
+
         final Handler handler = new Handler();
 
         @SuppressLint("ClickableViewAccessibility")
@@ -536,18 +538,28 @@ public class ChatActivity extends AppCompatActivity
             audio_time_txt = itemView.findViewById(R.id.record_time_txt);
             audio_duration_txt = itemView.findViewById(R.id.record_duration_txt);
             play_audio = itemView.findViewById(R.id.play_record);
+            rotateLoading = itemView.findViewById(R.id.get_progress);
 
             seekBar.setMax(99); // 100% (0~99)
-            seekBar.setOnTouchListener(new View.OnTouchListener() {
+            seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+            {
                 @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if(mediaPlayer.isPlaying())
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+                {
+                    if (fromUser)
                     {
-                        SeekBar seekBar = (SeekBar)v;
-                        int playPosition = (mediafilelength/100)*seekBar.getProgress();
-                        mediaPlayer.seekTo(playPosition);
+                        mediaPlayer.seekTo(progress);
                     }
-                    return false;
+                }
+
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+
+                }
+
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+
                 }
             });
         }
@@ -568,21 +580,65 @@ public class ChatActivity extends AppCompatActivity
                     audio_card.setCardBackgroundColor(Color.parseColor("#e9b0e9ff"));
                 }
 
-                setupmedia(chatMessage.getMessage());
+                mediaPlayer = new MediaPlayer();
+                mediaPlayer.setOnBufferingUpdateListener(this);
+                mediaPlayer.setOnCompletionListener(this);
+
+                @SuppressLint("StaticFieldLeak") final AsyncTask<String,String,String> mp3player = new AsyncTask<String, String, String>()
+                {
+                    @Override
+                    protected void onPreExecute()
+                    {
+                        rotateLoading.start();
+                        play_audio.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    protected String doInBackground(String... strings)
+                    {
+                        try
+                        {
+                            mediaPlayer.setDataSource(strings[0]);
+                            mediaPlayer.prepare();
+                        } catch (IOException e)
+                        {
+                            e.printStackTrace();
+                        }
+                        return "";
+                    }
+
+                    @SuppressLint("DefaultLocale")
+                    @Override
+                    protected void onPostExecute(String s)
+                    {
+                        seekBar.setMax(mediaPlayer.getDuration());
+                        audio_duration_txt.setText(String.format("%02d:%02d ",
+                                java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(mediaPlayer.getDuration()),
+                                java.util.concurrent.TimeUnit.MILLISECONDS.toSeconds(mediaPlayer.getDuration()) -
+                                        java.util.concurrent.TimeUnit.MINUTES.toSeconds(java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(mediaPlayer.getDuration()))
+                        ));
+
+                        rotateLoading.stop();
+                        play_audio.setVisibility(View.VISIBLE);
+                    }
+                };
+
+                mp3player.execute(chatMessage.getMessage()); // direct link mp3 file
 
                 play_audio.setOnClickListener(new View.OnClickListener()
                 {
                     @Override
                     public void onClick(View v)
                     {
-                        if (!mediaPlayer.isPlaying())
+                        if (mediaPlayer.isPlaying())
                         {
-                            mediaPlayer.start();
-                            play_audio.setImageResource(R.drawable.pause);
+                            mediaPlayer.pause();
+                            play_audio.setImageResource(R.drawable.playmusic);
                         } else
                         {
                             mediaPlayer.start();
-                            play_audio.setImageResource(R.drawable.playmusic);
+                            play_audio.setImageResource(R.drawable.pause);
+                            changeseekbar();
                         }
                     }
                 });
@@ -668,45 +724,20 @@ public class ChatActivity extends AppCompatActivity
             }
         }
 
-        public void setupmedia(String url)
+        private void changeseekbar()
         {
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setOnBufferingUpdateListener(this);
-            mediaPlayer.setOnCompletionListener(this);
+            seekBar.setProgress(mediaPlayer.getCurrentPosition());
 
-            try
+            if (mediaPlayer.isPlaying())
             {
-                mediaPlayer.setDataSource(url);
-                mediaPlayer.prepare();
-
-                mediafilelength = mediaPlayer.getDuration();
-                realtimelength = mediafilelength;
-
-                updateSeekBar();
-
-            } catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-        private void updateSeekBar() {
-            seekBar.setProgress((int)(((float)mediaPlayer.getCurrentPosition() / mediafilelength)*100));
-            if(mediaPlayer.isPlaying())
-            {
-                Runnable updater = new Runnable() {
-                    @SuppressLint("DefaultLocale")
+                Runnable runnable = new Runnable()
+                {
                     @Override
-                    public void run()
-                    {
-                        updateSeekBar();
-                        realtimelength-=1000; // declare 1 second
-                        audio_duration_txt.setText(String.format("%d:%d", java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(realtimelength),
-                                java.util.concurrent.TimeUnit.MILLISECONDS.toSeconds(realtimelength) -
-                                        java.util.concurrent.TimeUnit.MILLISECONDS.toSeconds(java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(realtimelength))));
+                    public void run() {
+                        changeseekbar();
                     }
                 };
-                handler.postDelayed(updater,1000); // 1 second
+                handler.postDelayed(runnable, 1000);
             }
         }
 
