@@ -30,7 +30,7 @@
                 android:textSize="18sp"
                 android:gravity="center"
                 android:padding="15dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/card_background"
                 android:textColor="#fff"
                 android:layout_marginBottom="10dp"
                 android:textStyle="bold"
@@ -102,7 +102,7 @@
                         <ImageView
                             android:layout_width="35dp"
                             android:layout_height="35dp"
-                            android:src="@drawable/photo"
+                            android:src="@drawable/ic_add_a_photo_blue_24dp"
                             android:layout_marginRight="10dp"
                             />
 

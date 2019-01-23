@@ -633,11 +633,11 @@ public class ChatActivity extends AppCompatActivity
                         if (mediaPlayer.isPlaying())
                         {
                             mediaPlayer.pause();
-                            play_audio.setImageResource(R.drawable.playmusic);
+                            play_audio.setImageResource(R.drawable.ic_play_arrow_black_24dp);
                         } else
                         {
                             mediaPlayer.start();
-                            play_audio.setImageResource(R.drawable.pause);
+                            play_audio.setImageResource(R.drawable.ic_pause_black_24dp);
                             changeseekbar();
                         }
                     }
@@ -751,7 +751,7 @@ public class ChatActivity extends AppCompatActivity
         @Override
         public void onCompletion(MediaPlayer mp)
         {
-            play_audio.setImageResource(R.drawable.playmusic);
+            play_audio.setImageResource(R.drawable.ic_play_arrow_black_24dp);
         }
     }
 

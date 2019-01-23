@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:state_checked="true"
-        android:color="@color/colorPrimaryDark"
-        >
-        <shape>
+    <item>
+        <shape android:shape="rectangle">
             <gradient
                 android:startColor="#46b5df"
                 android:centerColor="#7ccfef"
                 android:endColor="#b4dded"/>
         </shape>
-
     </item>
-
-    <item
-        android:state_checked="false"
-        android:color="@color/smalltext"
-        />
 
 </selector>

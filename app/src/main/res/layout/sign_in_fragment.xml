@@ -126,7 +126,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="sign in"
-                    android:background="@color/colorPrimary"
+                    android:background="@drawable/card_background"
                     android:textColor="#fff"
                     android:textStyle="bold"
                     />

@@ -11,8 +11,10 @@
         android:layout_centerInParent="true"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_margin="10dp"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="2dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true"
+        >
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -65,7 +67,7 @@
                     android:id="@+id/btn_next"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@drawable/card_background"
                     android:gravity="center"
                     android:text="Next"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"

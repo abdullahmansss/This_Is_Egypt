@@ -56,7 +56,7 @@
                             android:textSize="14sp"
                             android:gravity="center"
                             android:padding="15dp"
-                            android:background="@color/colorPrimary"
+                            android:background="@drawable/card_background"
                             android:textColor="#fff"
                             android:textStyle="bold"
                             />
@@ -110,7 +110,7 @@
                             android:textSize="14sp"
                             android:gravity="center"
                             android:padding="15dp"
-                            android:background="@color/colorPrimary"
+                            android:background="@drawable/card_background"
                             android:textColor="#fff"
                             android:textStyle="bold"
                             />

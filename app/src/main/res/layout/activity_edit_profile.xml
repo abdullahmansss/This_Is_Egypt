@@ -170,7 +170,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="sign out"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/card_background"
                         android:textColor="#fff"
                         android:textStyle="bold"
                         />
@@ -200,7 +200,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="save changes"
-                        android:background="@color/colorPrimary"
+                        android:background="@drawable/card_background"
                         android:textColor="#fff"
                         android:textStyle="bold"
                         />

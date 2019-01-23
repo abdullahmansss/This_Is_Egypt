@@ -82,6 +82,11 @@
                     android:id="@+id/record_seekbar"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:progressDrawable="@drawable/seekbar_style"
+                    android:thumb="@drawable/custom_thumb"
+                    android:maxHeight="3dp"
+                    android:splitTrack="false"
+                    android:layout_marginBottom="3dp"
                     />
 
                 <RelativeLayout
@@ -121,8 +126,8 @@
                     android:id="@+id/play_record"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/playmusic"
-                    android:padding="15dp"
+                    android:src="@drawable/ic_play_arrow_black_24dp"
+                    android:padding="7dp"
                     />
 
                 <com.victor.loading.rotate.RotateLoading

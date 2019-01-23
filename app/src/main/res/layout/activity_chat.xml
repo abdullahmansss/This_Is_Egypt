@@ -34,7 +34,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/card_background"
             />
 
     <android.support.v7.widget.RecyclerView
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:src="@drawable/ic_send"
+                android:src="@drawable/ic_send_black_24dp"
                 app:rippleColor="@color/btn"
                 android:clickable="true"
                 android:focusable="true"
@@ -122,7 +122,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                android:src="@drawable/microphone"
+                android:src="@drawable/ic_mic_black_24dp"
                 app:rippleColor="@color/btn"
                 android:clickable="true"
                 android:focusable="true"

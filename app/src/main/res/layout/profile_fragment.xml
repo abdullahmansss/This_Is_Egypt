@@ -123,7 +123,7 @@
                                         android:layout_height="match_parent"
                                         android:text="edit profile"
                                         android:textSize="12sp"
-                                        android:background="@color/colorPrimary"
+                                        android:background="@drawable/card_background"
                                         android:textColor="#fff"
                                         android:padding="5dp"
                                         />
